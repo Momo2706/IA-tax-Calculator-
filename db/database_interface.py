@@ -17,3 +17,16 @@ def validate_from_db(name1, username1, password):
     elif pword[0] != password:
         val = False 
         return val
+    
+def country_list():
+    conn = sqlite3.connect('my_app.db')
+    countries = conn.execute(" SELECT country FROM country_tax").fetchall()
+    return countries
+
+def adding_countries(country, country_code, tax_border, txable_income):
+    conn = sqlite3.connect('my_app.db')
+    conn.execute("INSERT INTO country_tax (country, country_code, tax_borders, min_taxable_income) \
+                 VALUES (?, ?, ?, ?)", (country, country_code, tax_border, txable_income))
+    conn.commit()
+    conn.close()
+

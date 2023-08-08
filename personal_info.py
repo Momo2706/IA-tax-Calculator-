@@ -1,5 +1,5 @@
 import PySimpleGUI as sg  
-from my_app_functions import USA_single, USA_married, Dutch_single, Dutch_married
+from my_app_functions import Tax
 
 def personal_info():
      sg.theme("DarkBlack1")
@@ -24,24 +24,6 @@ def personal_info():
                 person_window.close()
                 break   
             elif event == 'Submit':
-                if values['-COUNTRY-'][0] == '+1':
-                     if values['-MAR-'] == True:
-                        person_window.close()
-                        USA_married()
-                     elif values['-DIV-'] == True or values['-UNMAR-'] == True:
-                        person_window.close()
-                        USA_single()
-                if values['-COUNTRY-'][0] == '+31':
-                     if values['-MAR-'] == True:
-                        person_window.close()
-                        Dutch_married()
-                     elif values['-DIV-'] == True or values['-UNMAR-'] == True:
-                        person_window.close()
-                        Dutch_single()
-                if values['-COUNTRY-'][0] == '+34':
-                     person_window.close()
-                if values['-COUNTRY-'][0] == '+44':
-                     person_window.close()
-                if values['-COUNTRY-'][0] == '+377':
-                     person_window.close()
+                person_window.close()
+                Tax()
      person_window.close()
