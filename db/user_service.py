@@ -9,7 +9,7 @@ def get_user(user_id: int) -> User:
 
     return user
 
-def get_user_by_username(username: int) -> User:
+def get_user_by_username(username: str) -> User:
     conn = sqlite3.connect('my_app.db')
     result = conn.execute(" SELECT name, user FROM user WHERE username = ?", (username)).fetchone()
 

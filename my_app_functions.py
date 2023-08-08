@@ -12,13 +12,13 @@ def add_country():
                    [sg.Input(key='-MIN-')],
                    [sg.Submit(), sg.Cancel()]
      ]
-     Country_window = sg.Window('Adding Countries', editlayout)
+     country_window = sg.Window('Adding Countries', editlayout)
 
      while True:
-          event, values = Country_window.read()
+          event, values = country_window.read()
 
           if event == sg.WINDOW_CLOSED or event == 'Cancel':
-               Country_window.close()
+               country_window.close()
                break
           if event == 'Submit':
                country = values['-PLACE-']
@@ -33,14 +33,14 @@ def add_country():
                    sg.popup('Try again')
                taxeble_income = values['-MIN-'] 
                adding_countries(country, code, border, taxeble_income)
-               Country_window.close()
-               Tax()
-          Country_window.close()
+               country_window.close()
+               tax()
+          country_window.close()
 
 
 
 countries = country_list()
-def Tax():
+def tax():
      sg.theme("DarkBlack1")
      layout = [[sg.Text("Where are you currently living?")],
           [sg.InputOptionMenu(values=countries, key='-COUNT-')],
