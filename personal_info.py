@@ -1,5 +1,5 @@
 import PySimpleGUI as sg  
-from my_app_functions import Tax
+from my_app_functions import tax
 
 def personal_info():
      sg.theme("DarkBlack1")
@@ -25,5 +25,5 @@ def personal_info():
                 break   
             elif event == 'Submit':
                 person_window.close()
-                Tax()
+                tax()
      person_window.close()

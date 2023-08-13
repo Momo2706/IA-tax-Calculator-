@@ -23,10 +23,10 @@ def country_list():
     countries = conn.execute(" SELECT country FROM country_tax").fetchall()
     return countries
 
-def adding_countries(country, country_code, tax_border, txable_income):
+def adding_countries(country, tax_border):
     conn = sqlite3.connect('my_app.db')
-    conn.execute("INSERT INTO country_tax (country, country_code, tax_borders, min_taxable_income) \
-                 VALUES (?, ?, ?, ?)", (country, country_code, tax_border, txable_income))
+    conn.execute("INSERT INTO country_tax (name, tax_borders) \
+                 VALUES (?, ?)", (country, tax_border))
     conn.commit()
     conn.close()
 

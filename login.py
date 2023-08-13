@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import hashlib
 from personal_info import personal_info
 from db.database_interface import insert_to_db, validate_from_db
-from my_app_functions import Tax
+from my_app_functions import tax
 
 def log_in():
     loglayout = [
@@ -25,7 +25,7 @@ def log_in():
             d = validate_from_db(name, user, password)
             if d == True:
                 logwindow.close()
-                Tax()
+                tax()
             elif d == False: 
                 logwindow.close()
                 sg.popup('Invalid username or password')
