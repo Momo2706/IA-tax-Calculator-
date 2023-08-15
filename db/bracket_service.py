@@ -32,8 +32,8 @@ def set_bracket_by_id(bracket_id: int, bracket: Bracket) -> None:
         print(e)
     return
 
-def remove_bracket_by_id(bracker_id: int) -> Bracket:
+def delete_bracket_by_id(bracket_id: int) -> Bracket:
         conn = sqlite3.connect('my_app.db')
-        conn.execute("DELETE FROM bracket WHERE id = ?")
+        conn.execute("DELETE FROM bracket WHERE id = ?", (bracket_id))
 
         

@@ -33,5 +33,5 @@ def set_country_by_id(country_id: int, country: Country) -> None:
 
 def remove_country_by_id(country_id: int) -> Country:
     conn = sqlite3.connect('my_app.db')
-    conn.execute("DELETE FROM country WHERE id = ?")
+    conn.execute("DELETE FROM country WHERE id = ?", (country_id))
     
