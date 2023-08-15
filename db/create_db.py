@@ -36,6 +36,8 @@ query3 = ('''
         '''
         )
 
+# create history
+
 conn.execute(query)
 conn.execute(query2)
 conn.execute(query3)

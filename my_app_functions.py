@@ -1,4 +1,7 @@
-import PySimpleGUI as sg 
+from typing import List
+import PySimpleGUI as sg
+from model.tax import Tax
+from model.income_tax import IncomeTax
 from db.database_interface import country_list, adding_countries
 
 
@@ -54,3 +57,13 @@ def tax():
           if event == 'Submit':
                Residance = values['-COUNT-']
           Window.close()
+
+# for learning purposes
+def calculate_tax():
+     taxes: List[Tax] = []
+     result = 0
+     for tax in taxes:
+          result += tax.calculate_tax()
+     
+     print(result)
+          
