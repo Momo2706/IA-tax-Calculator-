@@ -1,5 +1,7 @@
 import sqlite3
+from typing import List
 
+# save_user()
 def insert_to_db(name, username, password):
     conn = sqlite3.connect('my_app.db')
     conn.execute(" INSERT INTO user (name, username, password) \
@@ -7,23 +9,21 @@ def insert_to_db(name, username, password):
     conn.commit()
     conn.close()
 
-def validate_from_db(name1, username1, password):
+# authenticate_user
+def validate_from_db(name, username, password) -> bool:
     conn = sqlite3.connect('my_app.db')
-    pword = conn.execute(" SELECT password FROM user WHERE name = ? AND username = ?", (name1, username1)).fetchone()
-    val = False
-    if pword[0] == password:
-        val = True
-        return val
-    elif pword[0] != password:
-        val = False 
-        return val
+    pword = conn.execute(" SELECT password FROM user WHERE name = ? AND username = ?", (name, username)).fetchone()
     
-def country_list():
+    return pword[0] == password
+
+# get_countries()
+def country_list() -> List[str]:
     conn = sqlite3.connect('my_app.db')
     countries = conn.execute(" SELECT name FROM country").fetchall()
     return countries
 
-def adding_countries(country, tax_border):
+# save_country
+def adding_countries(country: str, tax_border: str) -> None:
     conn = sqlite3.connect('my_app.db')
     conn.execute("INSERT INTO country (name, tax_borders) \
                  VALUES (?, ?)", (country, tax_border))
