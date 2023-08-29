@@ -1,5 +1,5 @@
-from tax import Tax
-from user import User
+from model.tax import Tax
+from model.user import User
 
 class IncomeTax(Tax):
     # overriding abstract method

@@ -14,7 +14,9 @@ query = ('''
          )
          '''
         )
-query2 = ('''
+conn.execute(query)
+
+query = ('''
          CREATE TABLE country
          (
          id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -23,7 +25,9 @@ query2 = ('''
          )
         '''
         )
-query3 = ('''
+conn.execute(query)
+
+query = ('''
          CREATE TABLE bracket
          (
          id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,8 +43,7 @@ query3 = ('''
 # create history
 
 conn.execute(query)
-conn.execute(query2)
-conn.execute(query3)
+
 conn.execute("INSERT INTO country (name, tax_border) \
               VALUES (?, ?)", ("United States of America", "Citizen Based"))
 conn.commit()

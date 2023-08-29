@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from user import User
+from model.user import User
 class Tax(ABC):
  
     @abstractmethod

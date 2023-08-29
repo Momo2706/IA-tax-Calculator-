@@ -40,6 +40,9 @@ def set_salary_by_id(user_id: int, user: User) -> None:
     return
 
 def remove_user_by_id(user_id: int) -> User:
-    conn = sqlite3.connect('my_app.db')
-    conn.execute("DELETE FROM user WHERE id = ?", (user_id))
-    
+    try:
+        conn = sqlite3.connect('my_app.db')
+        conn.execute("DELETE FROM user WHERE id = ?", (user_id))
+    except Error as e:
+        print(e)
+    return
