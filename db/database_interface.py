@@ -20,13 +20,12 @@ def validate_from_db(name1, username1, password):
     
 def country_list():
     conn = sqlite3.connect('my_app.db')
-    countries = conn.execute(" SELECT country FROM country_tax").fetchall()
+    countries = conn.execute(" SELECT name FROM country").fetchall()
     return countries
 
 def adding_countries(country, tax_border):
     conn = sqlite3.connect('my_app.db')
-    conn.execute("INSERT INTO country_tax (name, tax_borders) \
+    conn.execute("INSERT INTO country (name, tax_borders) \
                  VALUES (?, ?)", (country, tax_border))
     conn.commit()
     conn.close()
-
