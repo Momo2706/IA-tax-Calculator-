@@ -1,9 +1,10 @@
 import PySimpleGUI as sg  
-from my_app_functions import tax
+from ui.login import go_to_login
+from ui.router import go_to
 
-def personal_info():
-     sg.theme("DarkBlack1")
-     layout = [[sg.Text("Name:"), sg.InputText(key='-NAME-', do_not_clear=True, size=(35,1))],
+sg.theme("DarkBlack1")
+
+layout = [[sg.Text("Name:"), sg.InputText(key='-NAME-', do_not_clear=True, size=(35,1))],
           [sg.Text("Lastname(s): "), sg.InputText(key='-LASTNAME-', do_not_clear=True, size=(29,1))],
           [sg.Text("Email:"), sg.InputText(key='-EMAIL-', do_not_clear=True, size=(35,1))],
           [sg.Text("Phone Number: "), sg.Listbox(values=['+1', '+31', '+34', '+44', '+377'], select_mode="single", key='-COUNTRY-'), sg.InputText(key='-PHONE-', do_not_clear=True, size=(19,1))],
@@ -14,16 +15,14 @@ def personal_info():
           [sg.Submit(), sg.Cancel()]
 ]
 
-     person_window = sg.Window('Tax', layout)
-
-    
+def go_to_personal_info():
+     sg.theme("DarkBlack1")
+     person_window = sg.Window('info', layout)
      while True:
             event, values = person_window.read()
 
             if event == sg.WINDOW_CLOSED or event == 'Cancel':
-                person_window.close()
                 break   
             elif event == 'Submit':
-                person_window.close()
-                tax()
+                go_to(person_window, go_to_login)
      person_window.close()

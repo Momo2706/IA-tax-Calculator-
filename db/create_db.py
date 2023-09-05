@@ -8,8 +8,8 @@ query = ('''
          name TEXT NOT NULL,
          username TEXT NOT NULL, 
          password TEXT NOT NULL,
-         salary INTEGER NOT NULL,
-         bracket_id INTEGER NOT NULL,
+         salary INTEGER,
+         bracket_id INTEGER,
          FOREIGN KEY(bracket_id) REFERENCES bracket(id)
          )
          '''
@@ -39,9 +39,21 @@ query = ('''
          )
         '''
         )
+conn.execute(query)
 
-# create history
-
+query = ('''
+        CREATE TABLE history
+        (
+         id INTEGER PRIMARY KEY AUTOINCREMENT,
+         user_id INTEGERN NOT NULL,
+         user_name TEXT NOT NULL, 
+         date TEXT NOT NULL, 
+         tax_amount INTEGER NOT NULL, 
+         amount_left INTEGER NOT NULL, 
+         FOREIGN KEY(user_id) REFERENCES user(id)
+        )
+        '''
+         )
 conn.execute(query)
 
 conn.execute("INSERT INTO country (name, tax_border) \

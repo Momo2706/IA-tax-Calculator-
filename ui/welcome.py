@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
-from logo import IMAGE
-from router import go_to
+from ui.logo import IMAGE
+from ui.router import go_to
 from ui.login import go_to_login
 from ui.signup import go_to_signup
 
@@ -8,6 +8,7 @@ LOGIN_BUTTON_EVENT = 'Login'
 SIGNUP_BUTTON_EVENT = 'Signup'
 OUR_STORY_BUTTON_EVENT = 'Our Story'
 
+sg.theme("DarkBlack1")
 
 WELCOME_WINDOW = [[sg.Image(source = IMAGE, key=('-IMAGE-'), expand_x=True, expand_y=True, size=(300,300))],
           [sg.Text("Hello and welcome to EASY-TAX, an app dedicated to helping people file their income tax.")],
@@ -19,9 +20,10 @@ WELCOME_WINDOW = [[sg.Image(source = IMAGE, key=('-IMAGE-'), expand_x=True, expa
 ]
 
 def go_to_welcome():
+    sg.theme("DarkBlack1")
     window = sg.Window('Welcome', WELCOME_WINDOW)
     while True:
-            event, _ = window.read()
+            event, values = window.read()
 
             if event == sg.WINDOW_CLOSED or event == 'Cancel':
                 break

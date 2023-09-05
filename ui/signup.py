@@ -1,8 +1,10 @@
 import PySimpleGUI as sg
 import hashlib
-from personal_info import personal_info
-from db.database_interface import insert_to_db, validate_from_db
-from my_app_functions import tax
+from ui.personal_info import go_to_personal_info
+from db.database_interface import save_user
+from ui.router import go_to
+
+sg.theme("DarkBlack1")
 
 SIGNUP_WINDOW = [
         [sg.Text('Name'), sg.Input(key='-NAME-')],
@@ -13,7 +15,7 @@ SIGNUP_WINDOW = [
     ]
 
 def go_to_signup():
-    
+    sg.theme("DarkBlack1")
     signwindow = sg.Window('Signup page', SIGNUP_WINDOW)
     while True:
         event, values = signwindow.read()
@@ -27,9 +29,8 @@ def go_to_signup():
             name = values['-NAME-']
             user = values['-USNAME-']
             if pass1 == pass2:
-                insert_to_db(name, user, hashlib.md5(pass1.encode()).digest())
-                signwindow.close()
-                personal_info()
+                save_user(name, user, hashlib.md5(pass1.encode()).digest())
+                go_to(signwindow, go_to_personal_info)
             else:
                 signwindow.close()
                 sg.popup('your passwords didnt match')
