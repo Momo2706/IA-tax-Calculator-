@@ -2,7 +2,7 @@ from typing import List
 import PySimpleGUI as sg
 from model.tax import Tax
 from model.income_tax import IncomeTax
-from db.database_interface import country_list, adding_countries, save_salary, save_info_to_bracket
+from db.database_interface import country_list, adding_countries, save_info_to_bracket
 from ui.login import username, password
 
 

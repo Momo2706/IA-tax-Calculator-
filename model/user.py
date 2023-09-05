@@ -1,6 +1,15 @@
+from model.country import Country
+
 class User:
-    def __init__(self, name, username, salary):
+
+    def __init__(self, name, username, password, salary, country):
+        self.id = 0
         self.name = name
         self.username = username
         self.salary = salary
-        # self.country = country
+        self.password = password
+        self.country: Country = country
+    
+    def set_salary(self, salary: int) -> None:
+        self.salary = salary
+        

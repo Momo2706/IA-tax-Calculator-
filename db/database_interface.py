@@ -1,13 +1,6 @@
 import sqlite3
 from typing import List
 
-def save_user(name, username, password):
-    conn = sqlite3.connect('my_app.db')
-    conn.execute(" INSERT INTO user (name, username, password) \
-                 VALUES (?, ?, ?)", (name, username, password))
-    conn.commit()
-    conn.close()
-
 def save_salary(salary, username, password, country, lower_bound, upper_bound):
     conn = sqlite3.connect('my_app.db')
     country_id = conn.execute("SELECT id FROM country WHERE name = ?", (country)).fetchone()
@@ -16,13 +9,6 @@ def save_salary(salary, username, password, country, lower_bound, upper_bound):
                  values(?, ?) WHERE username = ? AND password = ?", (salary, bracket_id, username, password))
     conn.commit()
     conn.close
-
-# authenticate_user
-def validate_from_db(name, username, password) -> bool:
-    conn = sqlite3.connect('my_app.db')
-    pword = conn.execute(" SELECT password FROM user WHERE name = ? AND username = ?", (name, username)).fetchone()
-    
-    return pword[0] == password
 
 # get_countries()
 def country_list() -> List[str]:

@@ -8,9 +8,9 @@ query = ('''
          name TEXT NOT NULL,
          username TEXT NOT NULL, 
          password TEXT NOT NULL,
-         salary INTEGER,
-         bracket_id INTEGER,
-         FOREIGN KEY(bracket_id) REFERENCES bracket(id)
+         salary INTEGER NOT NULL,
+         country_id INTEGER NOT NULL,
+         FOREIGN KEY(country_id) REFERENCES country(id)
          )
          '''
         )
@@ -46,7 +46,6 @@ query = ('''
         (
          id INTEGER PRIMARY KEY AUTOINCREMENT,
          user_id INTEGERN NOT NULL,
-         user_name TEXT NOT NULL, 
          date TEXT NOT NULL, 
          tax_amount INTEGER NOT NULL, 
          amount_left INTEGER NOT NULL, 

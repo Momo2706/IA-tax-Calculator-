@@ -1,16 +1,10 @@
 import PySimpleGUI as sg
 import hashlib
-from db.database_interface import insert_to_db, validate_from_db
+from db.user_service import log_in_user
 from my_app_functions import tax
 from ui.router import go_to
+from globals import session
 #from ui.welcome import go_to_welcome
-
-def remeber_name(user):
-    return user
-
-def remeber_password(password):
-    return password
-
 
 sg.theme("DarkBlack1")
 
@@ -35,17 +29,16 @@ def go_to_login():
             name = values['-NAME-']
             user = values['-USNAME-']
             password = hashlib.md5(values['-PASS-'].encode()).digest()
-            remeber_name(user)
-            remeber_password(password)
-            d = validate_from_db(name, user, password)
-            if d == True:
+
+            user = log_in_user(name, user, password)
+            if user != None:
+                session.set_user(user)
                 logwindow.close()
+                # go_to
                 tax()
-            elif d == False: 
+            else: 
                 logwindow.close()
                 sg.popup('Invalid username or password')
                 go_to_login()
-    logwindow.close()
 
-username = remeber_name
-password = remeber_password
+    logwindow.close()

@@ -1,8 +1,9 @@
 import PySimpleGUI as sg
 import hashlib
 from ui.personal_info import go_to_personal_info
-from db.database_interface import save_user
+from db.user_service import save_user
 from ui.router import go_to
+from globals import session
 
 sg.theme("DarkBlack1")
 
@@ -30,6 +31,7 @@ def go_to_signup():
             user = values['-USNAME-']
             if pass1 == pass2:
                 save_user(name, user, hashlib.md5(pass1.encode()).digest())
+                session.set_user(user)
                 go_to(signwindow, go_to_personal_info)
             else:
                 signwindow.close()
