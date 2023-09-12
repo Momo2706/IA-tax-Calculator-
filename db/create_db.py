@@ -21,7 +21,8 @@ query = ('''
          (
          id INTEGER PRIMARY KEY AUTOINCREMENT,
          name TEXT NOT NULL,
-         tax_border TEXT NOT NULL
+         tax_border TEXT NOT NULL,
+         phone_code TEXT NOT NULL
          )
         '''
         )

@@ -8,5 +8,6 @@ def main():
 if __name__ == "__main__":
       sg.theme("DarkBlack1")
       # logic to init DB
+      # DB exists? then do nothin, else recreate it
       # Init my_app.db if it doesn't exist.
       main()

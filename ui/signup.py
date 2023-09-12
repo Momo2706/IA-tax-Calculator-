@@ -1,9 +1,9 @@
 import PySimpleGUI as sg
 import hashlib
 from ui.login import go_to_login
-from db.database_interface import save_user
+from db.user_service import save_user
 from ui.router import go_to
-from db.database_interface import adding_countries
+from db.database_interface import add_country
 from globals import session
 
 sg.theme("DarkBlack1")
@@ -44,11 +44,11 @@ def go_to_signup():
             salary = values['-Salary-']
             country = values['-PLACE-']
             border = values['-BOR-'] 
-            adding_countries(country, border)
+            add_country(country, border)
             if pass1 == pass2:
                 save_user(name, user, hashlib.md5(pass1.encode()).digest(), salary, country)
                 session.set_user(user)
-                go_to(signwindow, go_to_login)
+                go_to(signwindow, go_to_login) # go to main menu
             else:
                 signwindow.close()
                 sg.popup('your passwords didnt match')

@@ -7,6 +7,7 @@ from ui.signup import go_to_signup
 LOGIN_BUTTON_EVENT = 'Login'
 SIGNUP_BUTTON_EVENT = 'Signup'
 OUR_STORY_BUTTON_EVENT = 'Our Story'
+CANCEL_BUTTON_EVENT = 'Cancel'
 
 sg.theme("DarkBlack1")
 
@@ -23,9 +24,9 @@ def go_to_welcome():
     sg.theme("DarkBlack1")
     window = sg.Window('Welcome', WELCOME_WINDOW)
     while True:
-            event, values = window.read()
+            event, _ = window.read()
 
-            if event == sg.WINDOW_CLOSED or event == 'Cancel':
+            if event == sg.WINDOW_CLOSED or event == CANCEL_BUTTON_EVENT:
                 break
 
             if event == LOGIN_BUTTON_EVENT:

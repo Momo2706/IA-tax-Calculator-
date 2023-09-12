@@ -39,9 +39,10 @@ def remove_user_by_id(user_id: int) -> None:
         print(e)
     return
 
-#def save_user(user: User):
-    #conn = sqlite3.connect('my_app.db')
-    #conn.execute(" INSERT INTO user (name, username, password, salary, country) \
-                 #VALUES (?, ?, ?)", (user.name, user.username, user.password, user.salary, user.country))
-    #conn.commit()
-    #conn.close()
+def save_user(name, user, password, salary, country):
+    conn = sqlite3.connect('my_app.db')
+    country_id = conn.execute("SELECT id FROM country WHERE name = ?", (country)).fetchone()
+    conn.execute(" INSERT INTO user (name, username, password, salary, country_id) \
+                 VALUES (?, ?, ?)", (name, user, password, salary, country_id))
+    conn.commit()
+    conn.close()

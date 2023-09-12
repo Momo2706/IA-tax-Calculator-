@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 import hashlib
 from db.user_service import log_in_user
-from my_app_functions import go_to_tax_info
+from ui.personal_info import go_to_tax_info
 from ui.router import go_to
 from globals import session
 #from ui.welcome import go_to_welcome
@@ -33,7 +33,7 @@ def go_to_login():
             user = log_in_user(name, user, password)
             if user != None:
                 session.set_user(user)
-                go_to(logwindow, go_to_tax_info)
+                go_to(logwindow, go_to_tax_info) # go to main menu
             else: 
                 logwindow.close()
                 sg.popup('Invalid username or password')
