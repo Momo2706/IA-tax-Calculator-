@@ -10,7 +10,7 @@ class Session:
     def is_user_logged_in(self) -> bool:
         return self.user != 0
     
-    def get_user(self) -> int:
+    def get_user(self) -> str:
         return self.user
 
     def log_user_out(self) -> None:

@@ -2,8 +2,8 @@ from typing import List
 import PySimpleGUI as sg
 from model.tax import Tax
 from model.income_tax import IncomeTax
-from db.database_interface import country_list, adding_countries, save_info_to_bracket
-from ui.login import username, password
+from db.database_interface import country_list, adding_countries, save_info_to_bracket, save_salary
+from globals import session
 
 
 def add_country():
@@ -26,12 +26,12 @@ def add_country():
                border = values['-BOR-'] 
                adding_countries(country, border)
                country_window.close()
-               tax()
+               go_to_tax_info()
           country_window.close()
 
      
 countries = country_list()
-def tax():
+def go_to_tax_info():
      sg.theme("DarkBlack1")
      layout = [[sg.Text("Where are you currently living?")],
           [sg.InputOptionMenu(values=countries, key='-COUNT-')],
@@ -64,7 +64,7 @@ def tax():
                upper_bound = values['-HIGH-']
                percentage = values['-PERCENT-']
                save_info_to_bracket(residance, lower_bound, upper_bound, percentage)
-               save_salary(salary, username, password, residance, lower_bound, upper_bound)
+               save_salary(salary, session.get_user(), residance, lower_bound, upper_bound)
           Window.close()
 
 # for learning purposes

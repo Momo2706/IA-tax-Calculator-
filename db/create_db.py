@@ -54,8 +54,5 @@ query = ('''
         '''
          )
 conn.execute(query)
-
-conn.execute("INSERT INTO country (name, tax_border) \
-              VALUES (?, ?)", ("United States of America", "Citizen Based"))
 conn.commit()
 conn.close()
