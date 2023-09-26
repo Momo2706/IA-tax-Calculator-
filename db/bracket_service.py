@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 from model.bracket import Bracket 
+from typing import List
 
 def get_bracket_by_id(bracket_id: int) -> Bracket:
     conn = sqlite3.connect('my_app.db')
@@ -10,20 +11,31 @@ def get_bracket_by_id(bracket_id: int) -> Bracket:
 
     return bracket
 
-def get_lower_bound_by_country_id(name):
-     conn = sqlite3.connect('my_app.db')
-     id = conn.execute("SELECT country_id FROM country WHERE name = ?", (name)).fetchone()
-     results = conn.execute("SELECT lower_bound FROM bracket WHERE country_id = ?", (id)).fetchall()
+def get_brackets_by_country_name(name: str) -> List[Bracket]:
+    conn = sqlite3.connect('my_app.db')
 
-     return results 
+    brackets: List[Bracket] = []
+
+    results = conn.execute('''
+                        SELECT bracket.country_id, bracket.lower_bound, bracket.upper_bound, bracket.percentage
+                        FROM bracket
+                        LEFT JOIN country ON country.id = bracket.country_id
+                        WHERE country.name = ?
+                        ORDER BY bracket.lower_bound ASC
+                        ''', (name,)).fetchall()
+    
+    for bracket in results:
+        brackets.append(Bracket(country_id=bracket[0], lower_bound=bracket[1], upper_bound=bracket[2], percentage=bracket[3]))
+
+    return brackets
 
 def get_percentage_by_lower_bracket(lower_bound):
      conn = sqlite3.connect('my_app.db')
      percent = conn.execute("SELECT percentage FROM bracket WHERE lower_bound = ?", (lower_bound)).fetchone()
 
-     return percent 
+     return percent
 
-def get_bracket_by_country_id(country_id: int) -> Bracket:
+def get_bracket_by_country_na(country_id: int) -> Bracket:
     conn = sqlite3.connect('my_app.db')
     results = conn.execute("SELECT lower_bound, upper_bound, percentage FROM bracket WHERE country_id = ?", (country_id)).fetchone()
 
