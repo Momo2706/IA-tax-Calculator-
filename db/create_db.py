@@ -54,6 +54,9 @@ query = ('''
         )
         '''
          )
+
+#add already 10-15 countries and their respective tax boarders
+
 conn.execute(query)
 conn.commit()
 conn.close()

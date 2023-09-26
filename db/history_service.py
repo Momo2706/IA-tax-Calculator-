@@ -38,3 +38,4 @@ def remove_tax_paid_by_date_and_user(user_id: int, date: str) -> History:
         except Error as e:
              print(e)
         return
+

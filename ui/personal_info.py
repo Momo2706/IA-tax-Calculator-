@@ -1,5 +1,4 @@
 import PySimpleGUI as sg  
-from ui.login import go_to_login
 from ui.router import go_to
 from db.country_service import get_phone_codes
 from db.database_interface import save_info_to_bracket, save_salary
@@ -28,7 +27,8 @@ def go_to_personal_info():
             if event == sg.WINDOW_CLOSED or event == 'Cancel':
                 break   
             elif event == 'Submit':
-                go_to(person_window, go_to_login)
+                person_window.close
+                #go_to(person_window, go_to_login) #go_to_main_menu
      person_window.close()
 
 def go_to_tax_info():

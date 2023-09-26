@@ -10,6 +10,19 @@ def get_bracket_by_id(bracket_id: int) -> Bracket:
 
     return bracket
 
+def get_lower_bound_by_country_id(name):
+     conn = sqlite3.connect('my_app.db')
+     id = conn.execute("SELECT country_id FROM country WHERE name = ?", (name)).fetchone()
+     results = conn.execute("SELECT lower_bound FROM bracket WHERE country_id = ?", (id)).fetchall()
+
+     return results 
+
+def get_percentage_by_lower_bracket(lower_bound):
+     conn = sqlite3.connect('my_app.db')
+     percent = conn.execute("SELECT percentage FROM bracket WHERE lower_bound = ?", (lower_bound)).fetchone()
+
+     return percent 
+
 def get_bracket_by_country_id(country_id: int) -> Bracket:
     conn = sqlite3.connect('my_app.db')
     results = conn.execute("SELECT lower_bound, upper_bound, percentage FROM bracket WHERE country_id = ?", (country_id)).fetchone()
