@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error 
 from model.history import History
+from typing import List
 
 def get_users_from_date(date: str) -> History:
     conn = sqlite3.connect('my_app.db')
@@ -39,3 +40,19 @@ def remove_tax_paid_by_date_and_user(user_id: int, date: str) -> History:
              print(e)
         return
 
+def get_dates_and_amount_by_user(user: str) -> List[History]:
+    conn = sqlite3.connect('my_app.db')
+
+    history: List[History] = []
+
+    results = conn.execute('''
+                        SELECT history.date, history.tax_amount, history.amount_left
+                        FROM bracket
+                        LEFT JOIN user ON user.id = history.user_id
+                        WHERE user.user = ?
+                        ORDER BY history.date ASC
+                        ''', (user,)).fetchall()
+    for history in results:
+        history.append(History(date=history[0], tax_amount=history[1], amount_left=history[2]))
+
+    return history 

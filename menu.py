@@ -1,5 +1,6 @@
 import PySimpleGUI as sg 
 from ui.personal_info import go_to_personal_info, go_to_tax_info
+from db.history_service import get_dates_from_user
 from globals import session
 
 #have the graphs and history here
@@ -21,6 +22,7 @@ def first_main_menu():
             go_to_tax_info()
     window.close()
 
+dates = get_dates_from_user()
 
 def main_menu():
     sg.theme("DarkBlack1")
