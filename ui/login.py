@@ -9,7 +9,6 @@ from globals import session
 sg.theme("DarkBlack1")
 
 LOGIN_WINDOW = [
-        [sg.Text('Name'), sg.Input(key='-NAME-')],
         [sg.Text('Username'), sg.Input(key='-USNAME-')],
         [sg.Text('Password'), sg.Input(key='-PASS-', password_char='*')],
         [sg.Button('Login'), sg.Button('Cancel')]
@@ -26,13 +25,13 @@ def go_to_login():
             break
 
         if event == 'Login':
-            name = values['-NAME-']
             user = values['-USNAME-']
             password = hashlib.md5(values['-PASS-'].encode()).digest()
 
-            user = log_in_user(name, user, password)
+            user = log_in_user(user, password)
             if user != None:
                 session.set_user(user)
+                # add main menu
                 go_to(logwindow, go_to_tax_info) # go to main menu
             else: 
                 logwindow.close()

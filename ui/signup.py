@@ -15,13 +15,13 @@ SIGNUP_WINDOW = [
         [sg.Text('Password'), sg.Input(key='-PASS-', password_char='*')],
         [sg.Text('Re-enter Password'), sg.Input(key='-REPASS-', password_char='*')],
         [sg.Text("Email:"), sg.InputText(key='-EMAIL-', do_not_clear=True, size=(35,1))],
-        [sg.Text("Phone Number: "), sg.Listbox(values=['+1', '+31', '+34', '+44', '+377'], select_mode="single", key='-COUNTRY-'), sg.InputText(key='-PHONE-', do_not_clear=True, size=(19,1))],
+        [sg.Text("Phone Number: "), sg.Listbox(values=['+1', '+31', '+34', '+44', '+377'], select_mode="single", key='-PHONE_CODE-'), sg.InputText(key='-PHONE-', do_not_clear=True, size=(19,1))],
         [sg.Text("Marital status:")],
         [sg.Radio("Married", "PART", False, key='-MAR-'), sg.Radio("Divorced", "PART", False, key='-DIV-'), sg.Radio("Unwed", "PART", False, key='-UNMAR-')],
         [sg.Text("How many children do you have:")],
         [sg.Spin(values=[i for i in range(1000)], initial_value=0, size=(20, 2), enable_events=True, key='-KID-')],
         [sg.Text("What is your salary?"), sg.InputText(key='-Salary-', do_not_clear=True)],
-        [sg.Text("Country of Residance"), sg.Input(key='-PLACE-')],
+        [sg.Text("Country of Residence"), sg.Input(key='-PLACE-')],
         [sg.Text("Tax Borders")],
         [sg.InputOptionMenu(values=["Citizen Based", "Resident Based", "Territorial Based"], key='-BOR-')],
         [sg.Button('sign_up'), sg.Button('Cancel')]
@@ -42,9 +42,7 @@ def go_to_signup():
             name = values['-NAME-']
             user = values['-USNAME-']
             salary = values['-Salary-']
-            country = values['-PLACE-']
-            border = values['-BOR-'] 
-            save_country(country, border)
+            country = values['-PLACE-'] # Load from a list -> read from DB
             if pass1 == pass2:
                 save_user(name, user, hashlib.md5(pass1.encode()).digest(), salary, country)
                 session.set_user(user)

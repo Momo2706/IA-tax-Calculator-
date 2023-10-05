@@ -5,8 +5,9 @@ from typing import List
 
 def get_countries() -> List[str]:
     conn = sqlite3.connect('my_app.db')
-    countries = conn.execute(" SELECT name FROM country").fetchall()
-    return countries
+    result = conn.execute("SELECT name FROM country").fetchall()
+    country_names = [country_name[0] for country_name in result]
+    return country_names
 
 def get_phone_codes() -> List[str]:
     conn = sqlite3.connect('my_app.db')
@@ -15,16 +16,16 @@ def get_phone_codes() -> List[str]:
 
 def get_country_by_id(country_id: int) -> Country:
     conn = sqlite3.connect('my_app.db')
-    result = conn.execute(" SELECT name, tax_border FROM country WHERE id = ?", (country_id)).fetchone()
+    result = conn.execute(" SELECT name, tax_border, phone_code FROM country WHERE id = ?", (country_id,)).fetchone()
 
-    country = Country(name=result[0], tax_border=result[1])
+    country = Country(name=result[0], tax_border=result[1], phone_code=[2])
 
     return country
 
 
 def get_country_by_name(country: str) -> Country:
     conn = sqlite3.connect('my_app.db')
-    result = conn.execute(" SELECT name, tax_border FROM country WHERE country = ?", (country)).fetchone()
+    result = conn.execute(" SELECT name, tax_border FROM country WHERE country = ?", (country,)).fetchone()
 
     country = Country(name=result[0], tax_border=result[1])
 
@@ -33,7 +34,7 @@ def get_country_by_name(country: str) -> Country:
 def save_country(country: str, tax_border: str, phone_code: str) -> None:
     conn = sqlite3.connect('my_app.db')
     conn.execute("INSERT INTO country (name, tax_border, phone_code) \
-                 VALUES (?, ?)", (country, tax_border, phone_code))
+                 VALUES (?, ?, ?)", (country, tax_border, phone_code))
     conn.commit()
     conn.close()
 

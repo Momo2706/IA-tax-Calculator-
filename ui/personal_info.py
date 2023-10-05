@@ -34,19 +34,15 @@ def go_to_personal_info():
 def go_to_tax_info():
      sg.theme("DarkBlack1")
      layout = [[sg.Text("Where are you currently living?")],
-          [sg.InputOptionMenu(values=get_countries(), key='-COUNT-')]
+          [sg.InputOptionMenu(values=get_countries(), key='-COUNT-')],
           [sg.Text("Do you live in a house or apartment.")],
-          [sg.Radio("House", "Houseing", key='-HOUSE-'), sg.Radio("Appartment", "Housing", key='-APPA-')],
-          [sg.Text("What is you total annula salary?(including all side jobs if you have any)")],
-          [sg.Text("What is your salary?"), sg.InputText(key='-Salary-', do_not_clear=True)],
-          [sg.Text("What are the tax Boundaries for your salary?")],
-          [sg.Text("Lower Bound"), sg.InputText(key='-LOW-', do_not_clear=True), sg.Text("Upper bound"), sg.InputText(key='-HIGH-', do_not_clear=True), sg.Text("Percentage of tax"), sg.Spin(values=[i for i in range(100)], initial_value=0, size=(20, 2), enable_events=True, key='-PERCENT-')]
+          [sg.Radio("House", "Housing", key='-HOUSE-'), sg.Radio("Appartment", "Housing", key='-APPA-')],
           [sg.Text("How would you and your partner be filing taxes"), sg.Radio("Jointly", "Filling", key='-FILE-'), sg.Radio("Separate", "Filling", key='-SFILE-'), sg.Radio("Head of the House", "Filling", key='-HOH-')],
           [sg.Text("Set the date of when the tax is beeing filed"),sg.Input(key='-PICKUP-', size=(20, 1)), sg.CalendarButton("Filing Date", close_when_date_chosen=True, target='-PICKUP-', location=(0, 0), no_titlebar=False)],
           [sg.Submit(), sg.Button("Back"), sg.Cancel()]
         ]
      
-     Window = sg.Window('USA', layout)
+     Window = sg.Window('Personal Info', layout)
      
      while True:
           event, values = Window.read()
@@ -54,11 +50,6 @@ def go_to_tax_info():
                Window.close()
                break 
           if event == 'Submit':
-               residance = values['-COUNT-']
-               salary = values['-Salary-']
-               lower_bound = values['-LOW-']
-               upper_bound = values['-HIGH-']
-               percentage = values['-PERCENT-']
-               save_info_to_bracket(residance, lower_bound, upper_bound, percentage)
-               save_salary(salary, session.get_user(), residance, lower_bound, upper_bound)
+               # add proper user info in a proper table
+               pass
           Window.close()
