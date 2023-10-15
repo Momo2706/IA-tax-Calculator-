@@ -5,7 +5,7 @@ from typing import List
 
 def get_bracket_by_id(bracket_id: int) -> Bracket:
     conn = sqlite3.connect('my_app.db')
-    results = conn.execute("SELECT lower_bound, upper_bound, percentage FROM bracket WHERE id = ?", (bracket_id)).fetchone()
+    results = conn.execute("SELECT lower_bound, upper_bound, percentage FROM bracket WHERE id = ?", (bracket_id,)).fetchone()
 
     bracket = Bracket(lower_bound=results[0], upper_bound=results[1], percentage=results[2])
 
@@ -31,13 +31,13 @@ def get_brackets_by_country_name(name: str) -> List[Bracket]:
 
 def get_percentage_by_lower_bracket(lower_bound):
      conn = sqlite3.connect('my_app.db')
-     percent = conn.execute("SELECT percentage FROM bracket WHERE lower_bound = ?", (lower_bound)).fetchone()
+     percent = conn.execute("SELECT percentage FROM bracket WHERE lower_bound = ?", (lower_bound,)).fetchone()
 
      return percent
 
 def get_bracket_by_country_na(country_id: int) -> Bracket:
     conn = sqlite3.connect('my_app.db')
-    results = conn.execute("SELECT lower_bound, upper_bound, percentage FROM bracket WHERE country_id = ?", (country_id)).fetchone()
+    results = conn.execute("SELECT lower_bound, upper_bound, percentage FROM bracket WHERE country_id = ?", (country_id,)).fetchone()
 
     bracket = Bracket(lower_bound=results[0], upper_bound=results[1], percentage=results[2])
 

@@ -5,7 +5,7 @@ from db.country_service import get_country_by_id
 
 def get_user(user_id: int) -> User:
     conn = sqlite3.connect('my_app.db')
-    result = conn.execute(" SELECT name, user FROM user WHERE id = ?", (user_id)).fetchone()
+    result = conn.execute(" SELECT name, user FROM user WHERE id = ?", (user_id,)).fetchone()
 
     user = User(name=result[0], username=result[1])
 

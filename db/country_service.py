@@ -11,8 +11,13 @@ def get_countries() -> List[str]:
 
 def get_phone_codes() -> List[str]:
     conn = sqlite3.connect('my_app.db')
-    codes = conn.execute(" SELECT phone_code FROM country").fetchall()
+    codes = conn.execute(" SELECT DISTINCT phone_code FROM country").fetchall()
     return codes
+
+def get_currency() -> List[str]:
+    conn = sqlite3.connect('my_app.db')
+    money = conn.execute(" SELECT DISTINCT currency FROM country").fetchall()
+    return money
 
 def get_country_by_id(country_id: int) -> Country:
     conn = sqlite3.connect('my_app.db')
@@ -31,10 +36,10 @@ def get_country_by_name(country: str) -> Country:
 
     return country
 
-def save_country(country: str, tax_border: str, phone_code: str) -> None:
+def save_country(country: str, phone_code: str) -> None:
     conn = sqlite3.connect('my_app.db')
     conn.execute("INSERT INTO country (name, tax_border, phone_code) \
-                 VALUES (?, ?, ?)", (country, tax_border, phone_code))
+                 VALUES (?, ?, ?)", (country, phone_code))
     conn.commit()
     conn.close()
 
