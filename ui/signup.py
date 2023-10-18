@@ -44,8 +44,6 @@ def go_to_signup():
             if pass1 == pass2:
                 save_user(name, user, hashlib.md5(pass1.encode()).digest(), salary, country)
                 session.set_user(user)
-                session.set_salary(salary)
-                session.set_country(country)
                 go_to(signwindow, first_main_menu) # go to main menu
             else:
                 signwindow.close()

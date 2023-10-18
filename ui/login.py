@@ -4,6 +4,7 @@ from db.user_service import log_in_user
 from ui.menu import main_menu
 from ui.router import go_to
 from globals import session
+from model.user import User
 #from ui.welcome import go_to_welcome
 
 sg.theme("DarkBlack1")
@@ -28,7 +29,7 @@ def go_to_login():
             user = values['-USNAME-']
             password = hashlib.md5(values['-PASS-'].encode()).digest()
 
-            user = log_in_user(user, password)
+            user: User = log_in_user(user, password)
             if user != None:
                 session.set_user(user)
                 go_to(logwindow, main_menu) # go to main menu

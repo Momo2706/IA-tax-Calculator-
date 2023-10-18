@@ -32,6 +32,7 @@ amount = []
 for history in history:
     dates.append(history.date)
     amount.append(history.tax_amount)
+
 def history_graph(filling_dates, tax_amount):
     plt.plot(filling_dates, tax_amount, color='yellow', marker='o')
     plt.title('Taxing history', fontsize=14)
@@ -61,6 +62,6 @@ def main_menu():
             break
         elif event == "edit personal info":
             go_to(window, go_to_personal_info)
-        elif event == "new filing":
+        elif event == "New filing":
             go_to(window, go_to_tax_info)
     window.close()

@@ -49,7 +49,6 @@ query = ('''
          user_id INTEGERN NOT NULL,
          date INTEGER NOT NULL, 
          tax_amount INTEGER NOT NULL, 
-         amount_left INTEGER NOT NULL, 
          FOREIGN KEY(user_id) REFERENCES user(id)
         )
         '''

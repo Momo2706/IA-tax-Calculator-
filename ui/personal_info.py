@@ -1,21 +1,26 @@
-import PySimpleGUI as sg  
+import PySimpleGUI as sg 
+import calendar 
 from ui.router import go_to
+from typing import List
+from model.tax import Tax
 from db.country_service import get_phone_codes, get_countries
 from db.history_service import set_history
 from ui.confirmation import confirm_personal_info_changes_successful, confirm_tax_filling
 from datetime import datetime
 from model.income_tax import IncomeTax
+from model.property_tax import PropertyTax
 from globals import session
 
-
-def place_of_residence(residence):
-               if residence == None:
-                    return session.get_country
-               else:
-                    session.change_country(residence)
-                    return session.get_country
-
 sg.theme("DarkBlack1")
+
+def get_appliable_taxes() -> List[Tax]:
+     user = session.get_user()
+     appliable_taxes: List[Tax] = []
+
+     if user.country.name != "Monaco":
+          appliable_taxes.append(IncomeTax())
+     
+     appliable_taxes.append(PropertyTax())
 
 layout = [[sg.Text("Name:"), sg.InputText(key='-NAME-', do_not_clear=True, size=(35,1))],
           [sg.Text("Lastname(s): "), sg.InputText(key='-LASTNAME-', do_not_clear=True, size=(29,1))],
@@ -42,8 +47,7 @@ def go_to_personal_info():
 
 def go_to_tax_info():
      sg.theme("DarkBlack1")
-     layout = [[sg.Text("Where are you currently living?(if place of residence hasnt change do not select any country)")],
-          [sg.InputOptionMenu(values=get_countries(), key='-COUNT-')],
+     layout = [
           [sg.Text("Do you live in a house or apartment.")],
           [sg.Radio("House", "Housing", key='-HOUSE-'), sg.Radio("Appartment", "Housing", key='-APPA-')],
           [sg.Text("Set the date of when the tax is beeing filled"),sg.Input(key='-PICKUP-', size=(20, 1)), sg.CalendarButton("Filing Date", close_when_date_chosen=True, target='-PICKUP-', location=(0, 0), no_titlebar=False, format=('%Y-%m-%d'))],
@@ -60,12 +64,17 @@ def go_to_tax_info():
           if event == 'Submit':
                date_str = values['-PICKUP-']
                date = datetime.strptime(date_str, '%Y-%m-%d')
-               salary = session.get_salary
-               user = session.get_user
-               country = place_of_residence(values['-COUNT-'])  
-               tax_amount = IncomeTax.calculate_tax(salary, country)  
-               amount_left = salary - tax_amount
-               set_history(user, int(date), tax_amount, amount_left)
+               user = session.get_user()
+
+               #appliable_taxes = get_appliable_taxes()
+               
+               appliable_taxes: List[Tax] = [IncomeTax()]
+               total_tax_amount = 0
+
+               for tax in appliable_taxes:
+                    total_tax_amount += tax.calculate_tax(user=user)
+               
+               set_history(user, calendar.timegm(date.timetuple()), total_tax_amount)
                go_to(Window, confirm_tax_filling)
                pass
           Window.close()

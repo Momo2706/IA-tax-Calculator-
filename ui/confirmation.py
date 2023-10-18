@@ -22,7 +22,7 @@ def confirm_personal_info_changes_successful():
 def confirm_tax_filling():
     from ui.menu import main_menu
     sg.theme("DarkBlack1")
-    menu_window =[[sg.Text("your taxes")],
+    menu_window =[[sg.Text("Taxes calculated")],
                   [sg.Button("Main Menu"), sg.Button('Leave')],
     ]
     window = sg.Window("Main Menu", menu_window)

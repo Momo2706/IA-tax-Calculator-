@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
 from ui.welcome import go_to_welcome
-from model.session import Session
 
 def main():
     go_to_welcome()

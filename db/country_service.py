@@ -21,18 +21,18 @@ def get_currency() -> List[str]:
 
 def get_country_by_id(country_id: int) -> Country:
     conn = sqlite3.connect('my_app.db')
-    result = conn.execute(" SELECT name, tax_border, phone_code FROM country WHERE id = ?", (country_id,)).fetchone()
+    result = conn.execute(" SELECT name, phone_code FROM country WHERE id = ?", (country_id,)).fetchone()
 
-    country = Country(name=result[0], tax_border=result[1], phone_code=[2])
+    country = Country(name=result[0], phone_code=result[1])
 
     return country
 
 
 def get_country_by_name(country: str) -> Country:
     conn = sqlite3.connect('my_app.db')
-    result = conn.execute(" SELECT name, tax_border FROM country WHERE country = ?", (country,)).fetchone()
+    result = conn.execute(" SELECT name, phone_code FROM country WHERE country = ?", (country,)).fetchone()
 
-    country = Country(name=result[0], tax_border=result[1])
+    country = Country(name=result[0],phone_code=result[1])
 
     return country
 
