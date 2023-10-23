@@ -17,7 +17,7 @@ LOGIN_WINDOW = [
 
 def go_to_login():
     sg.theme("DarkBlack1")
-    logwindow = sg.Window('Login Page', LOGIN_WINDOW)
+    logwindow = sg.Window('Login Page', LOGIN_WINDOW, size=(450,100))
     while True:
         event, values = logwindow.read()
 

@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from ui.personal_info import go_to_personal_info, go_to_tax_info
-from db.history_service import get_dates_and_amount_by_user
+from db.history_service import get_history_by_user
 from ui.router import go_to
 from globals import session
 
@@ -26,7 +26,7 @@ def first_main_menu():
             go_to(window, go_to_personal_info)
     window.close()
 
-history = get_dates_and_amount_by_user(user)
+history = get_history_by_user(user)
 dates = []
 amount = []
 for history in history:
@@ -50,7 +50,7 @@ def draw_figure(canvas, figure):
 def main_menu():
     sg.theme("DarkBlack1")
     menu_window =[[sg.Text("Welcome", key=user)],
-                  [sg.Canvas(size=(500,500), key='-CANVAS-')],
+                  [sg.Canvas(size=(250,250), key='-CANVAS-')],
                   [sg.Button("New filing"), sg.Button("edit personal info")],
                   [sg.Cancel()]
     ]

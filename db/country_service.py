@@ -39,7 +39,7 @@ def get_country_by_name(country: str) -> Country:
 def save_country(country: str, phone_code: str) -> None:
     conn = sqlite3.connect('my_app.db')
     conn.execute("INSERT INTO country (name, tax_border, phone_code) \
-                 VALUES (?, ?, ?)", (country, phone_code))
+                 VALUES (?, ?)", (country, phone_code))
     conn.commit()
     conn.close()
 

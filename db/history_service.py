@@ -7,8 +7,9 @@ from typing import List
 def set_history(user, date, tax_paid):
     conn = sqlite3.connect('my_app.db')
     user_id = conn.execute("SELECT id FROM user WHERE username = ?", (user,)).fetchone()
-    conn.execute("INSERT INTO history (user_id, date, tax_amount, amount_left) \
-                 VALUES(?, ?, ?, ?)", (user_id[0], date, tax_paid))
+    conn.execute("INSERT INTO history (user_id, date, tax_amount) \
+                 VALUES(?, ?, ?)", (user_id[0], date, tax_paid))
+    print("history set")
 
 def get_users_from_date(date: str) -> History:
     conn = sqlite3.connect('my_app.db')
@@ -41,7 +42,7 @@ def set_tax_paid_by_date_and_user(user_id: int, date: str, history: History) -> 
 def delete_history_by_id(id: int) -> History:
         try:
             conn = sqlite3.connect('my_app.db')
-            conn.execute("DELETE FROM history WHERE id = ?", (id,))
+            conn.execute("DELETE FROM history WHERE id = ?", (id))
         except Error as e:
              print(e)
         return

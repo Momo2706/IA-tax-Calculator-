@@ -38,11 +38,17 @@ def go_to_signup():
             pass1 = values['-PASS-']
             pass2 = values['-REPASS-']
             name = values['-NAME-']
+            last_name = values['-LASTNAME-']
             user = values['-USNAME-']
+            email = values['-EMAIL-']
+            phone_code = values['-PHONE_CODE-']
+            phone_number = values['-PHONE-']
+            kids = values['-KID-']
             salary = int(values['-SALARY-'])
+            currency = values['-CASH-']
             country = values['-PLACE-']
             if pass1 == pass2:
-                save_user(name, user, hashlib.md5(pass1.encode()).digest(), salary, country)
+                save_user(name, last_name, user, hashlib.md5(pass1.encode()).digest(), email, phone_code, phone_number, kids, salary, currency, country)
                 session.set_user(user)
                 go_to(signwindow, first_main_menu) # go to main menu
             else:
