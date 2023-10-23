@@ -19,9 +19,9 @@ def log_in_user(username, password) -> User:
     if result[4] != password:
         return None
     
-    contries = get_country_by_id(int(result[11]))
+    country = get_country_by_id(int(result[11]))
     
-    user = User(name=result[1], last_name=result[2], username=result[3], password=result[4], email=result[5], phone_code=result[6], phone_number=result[7], kids=result[8], salary=result[9], currency=result[10], country=contries.name)
+    user = User(id=result[0], name=result[1], last_name=result[2], username=result[3], password=result[4], email=result[5], phone_code=result[6], phone_number=result[7], kids=result[8], salary=result[9], currency=result[10], country=country)
 
     return user
 

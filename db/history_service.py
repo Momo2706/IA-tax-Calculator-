@@ -1,14 +1,20 @@
 import sqlite3
+from model.user import User
 from sqlite3 import Error 
 from model.history import History
 from typing import List
 
 
-def set_history(user, date, tax_paid):
+def set_history(user: User, date, tax_paid):
     conn = sqlite3.connect('my_app.db')
-    user_id = conn.execute("SELECT id FROM user WHERE username = ?", (user,)).fetchone()
-    conn.execute("INSERT INTO history (user_id, date, tax_amount) \
-                 VALUES(?, ?, ?)", (user_id[0], date, tax_paid))
+    try:
+        conn.execute("INSERT INTO history (user_id, date, tax_amount) \
+                    VALUES(?, ?, ?)", (user.id, date, tax_paid))
+        conn.commit()
+        conn.close()
+    except Error as e:
+        print(e)
+
     print("history set")
 
 def get_users_from_date(date: str) -> History:
@@ -47,10 +53,12 @@ def delete_history_by_id(id: int) -> History:
              print(e)
         return
 
-def get_history_by_user(user: str) -> List[History]:
+def get_history_by_user(user: User) -> List[History]:
     conn = sqlite3.connect('my_app.db')
 
-    history: List[History] = []
+    assert user != None
+
+    histories: List[History] = []
 
     results = conn.execute('''
                         SELECT history.date, history.tax_amount
@@ -58,8 +66,8 @@ def get_history_by_user(user: str) -> List[History]:
                         LEFT JOIN user ON user.id = history.user_id
                         WHERE user.username = ?
                         ORDER BY history.date ASC
-                        ''', (user,)).fetchall()
+                        ''', (user.username,)).fetchall()
     for history in results:
-        history.append(History(date=history[0], tax_amount=history[1]))
+        histories.append(History(user=user, date=history[0], tax_amount=history[1]))
 
-    return history 
+    return histories

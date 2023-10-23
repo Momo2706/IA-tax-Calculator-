@@ -88,10 +88,7 @@ def go_to_tax_info():
                for tax in appliable_taxes:
                     total_tax_amount = total_tax_amount + tax.calculate_tax(user)
                
-               set_history(user.username, calendar.timegm(date.timetuple()), total_tax_amount)
-               print("total tax = ", total_tax_amount)
-               print("salary =", user.salary)
-               print("country =", user.country)
+               set_history(user, calendar.timegm(date.timetuple()), total_tax_amount)
                go_to(Window, confirm_tax_filling)
                pass
           Window.close()
