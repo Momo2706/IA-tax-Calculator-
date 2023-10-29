@@ -1,5 +1,6 @@
 import sqlite3
 from typing import List
+from sqlite3 import OperationalError
 
 def save_salary(salary, username, country, lower_bound, upper_bound):
     conn = sqlite3.connect('my_app.db')
@@ -21,3 +22,10 @@ def save_info_to_bracket(country, lower_bound, upper_bound, percentage):
     conn.commit()
     conn.close
 
+def is_db_connected():
+    try:
+        conn = sqlite3.connect('my_app.db')
+        conn.execute("SELECT * FROM history") 
+        return True
+    except sqlite3.OperationalError:
+        return False

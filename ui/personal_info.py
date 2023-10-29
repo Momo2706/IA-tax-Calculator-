@@ -5,7 +5,7 @@ from typing import List
 from model.tax import Tax
 from db.country_service import get_countries, get_phone_codes, get_currency
 from db.history_service import set_history
-from db.user_service import update_user
+from db.user_service import update_user, log_in_user
 from ui.confirmation import confirm_personal_info_changes_successful, confirm_tax_filling
 from datetime import datetime
 from model.income_tax import IncomeTax
@@ -27,14 +27,14 @@ def go_to_personal_info():
              [sg.Text("Lastname(s): "), sg.InputText(user.last_name, key='-LASTNAME-', do_not_clear=True, size=(29,1))],
              [sg.Text('Username'), sg.Input(user.username, key='-USNAME-')],
              [sg.Text("Email:"), sg.InputText(user.email, key='-EMAIL-', do_not_clear=True, size=(35,1))],
-             [sg.Text("Phone Number: "), sg.InputOptionMenu(default_value=user.phone_code, values=get_phone_codes(), key='-PHONE_CODE-'), sg.InputText(user.phone_number, key='-PHONE-', do_not_clear=True, size=(19,1))],
+             [sg.Text("Phone Number: "), sg.InputOptionMenu(default_value=user.country.phone_code, values=get_phone_codes(), key='-PHONE_CODE-'), sg.InputText(user.phone_number, key='-PHONE-', do_not_clear=True, size=(19,1))],
              [sg.Text("Marital status:")],
              [sg.Radio("Married", "PART", False, key='-MAR-'), sg.Radio("Divorced", "PART", False, key='-DIV-'), sg.Radio("Unwed", "PART", False, key='-UNMAR-')],
              [sg.Text("How many children do you have:")],
              [sg.Spin(values=[i for i in range(1000)], initial_value=user.kids, size=(20, 2), enable_events=True, key='-KID-')],
              [sg.Text("What is your salary?"), sg.Input(user.salary, key='-SALARY-', do_not_clear=True), sg.InputOptionMenu(default_value=user.currency, values=get_currency(), key='-CASH-')],
-             [sg.Text("Country of Residence"), sg.InputOptionMenu(default_value=user.country, values=get_countries(), key='-PLACE-')],
-             [sg.Button('sign_up'), sg.Button('Cancel')]
+             [sg.Text("Country of Residence"), sg.InputOptionMenu(default_value=user.country.name, values=get_countries(), key='-PLACE-')],
+             [sg.Button('Submit'), sg.Button('Cancel')]
             ]
     sg.theme("DarkBlack1")
     person_window = sg.Window('Signup page', PERSONAL_WINDOW)
@@ -43,19 +43,20 @@ def go_to_personal_info():
 
         if event == sg.WINDOW_CLOSED or event == 'Cancel':
             break
-        elif event == 'Submit':
-                user = session.get_user()
-                new_name = values['-NAME-']
-                new_username = values['-USNAME-']
-                new_salary = values['-SALARY-']
-                new_country = values['-PLACE-']
-                new_last_name = values['-LASTNAME-']
-                new_email = values['-EMAIL-']
-                new_phone_code = values['-PHONE_CODE-']
-                new_phone_number = values['-PHONE-']
-                new_kids = values['-KID-']
-                new_currency = values['-CASH-']
-                update_user(user.name, new_name, new_last_name, new_username, new_email, new_phone_code, new_phone_number, new_kids, new_salary, new_currency, new_country)
+        user = session.get_user()
+        new_name = values['-NAME-']
+        new_username = values['-USNAME-']
+        new_salary = values['-SALARY-']
+        new_country = values['-PLACE-']
+        new_last_name = values['-LASTNAME-']
+        new_email = values['-EMAIL-']
+        new_phone_number = values['-PHONE-']
+        new_kids = values['-KID-']
+        new_currency = values['-CASH-']
+        if event == 'Submit':
+                update_user(user.name, new_name, new_last_name, new_username, new_email, new_phone_number, new_kids, new_salary, new_currency, new_country)
+                update = log_in_user(new_username, user.password)
+                session.set_user(update)
                 go_to(person_window, confirm_personal_info_changes_successful)
     person_window.close()
 

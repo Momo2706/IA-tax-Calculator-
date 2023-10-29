@@ -5,7 +5,8 @@ from db.bracket_service import get_brackets_by_country_name
 class IncomeTax(Tax):
     # overriding abstract method
     def calculate_tax(self, user: User) -> int:
-        brackets =  get_brackets_by_country_name(user.country.name)
+        country = str(user.country.name)
+        brackets =  get_brackets_by_country_name(country)
         total_tax_amount = 0
         for brackets in brackets:
             if user.salary >= brackets.upper_bound:

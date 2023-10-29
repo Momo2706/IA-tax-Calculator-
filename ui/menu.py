@@ -4,6 +4,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from ui.personal_info import go_to_personal_info, go_to_tax_info
 from db.history_service import get_history_by_user
 from ui.router import go_to
+from datetime import datetime
 from globals import session
     
 def first_main_menu():
@@ -56,7 +57,8 @@ def main_menu():
     dates = []
     amount = []
     for history in histories:
-        dates.append(history.date)
+        date = datetime.fromtimestamp(history.date)
+        dates.append(date)
         amount.append(history.tax_amount)
 
     figure = history_graph(dates, amount)
