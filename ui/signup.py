@@ -41,10 +41,28 @@ def go_to_signup():
             username = values['-USNAME-']
             email = values['-EMAIL-']
             phone_number = values['-PHONE-']
-            kids = values['-KID-']
+            kids = values['-KID-'] 
             salary = int(values['-SALARY-'])
-            currency = values['-CASH-']
+            currency = values['-CASH-'] 
             country = values['-PLACE-']
+
+            is_error = False
+
+            for key, value in values.items():
+                if value == '':
+                    is_error = True
+                    error_window = sg.Window('Error', [
+                        [sg.Text(f"Field {key} cannot be empty")],
+                        [sg.Button('Accept')]
+                    ])
+                    error_event, _ = error_window.read()
+                    if error_event == sg.WINDOW_CLOSED or error_event == 'Accept':
+                        error_window.close()
+                        break
+            
+            if is_error:
+                continue
+
             is_user_used = check_if_username_is_used(username)
             if pass1 == pass2 and is_user_used == False:
                 save_user(name, last_name, username, hashlib.md5(pass1.encode()).digest(), email, phone_number, kids, salary, currency, country)

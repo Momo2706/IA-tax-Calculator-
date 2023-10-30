@@ -7,16 +7,15 @@ from globals import session
 from model.user import User
 #from ui.welcome import go_to_welcome
 
-sg.theme("DarkBlack1")
+def go_to_login():
+    sg.theme("DarkBlack1")
 
-LOGIN_WINDOW = [
+    LOGIN_WINDOW = [
         [sg.Text('Username'), sg.Input(key='-USNAME-')],
         [sg.Text('Password'), sg.Input(key='-PASS-', password_char='*')],
         [sg.Button('Login'), sg.Button('Cancel')]
     ]
 
-def go_to_login():
-    sg.theme("DarkBlack1")
     logwindow = sg.Window('Login Page', LOGIN_WINDOW, size=(450,100))
     while True:
         event, values = logwindow.read()

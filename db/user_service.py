@@ -20,6 +20,9 @@ def log_in_user(username, password) -> User:
     try:
         conn = sqlite3.connect('my_app.db')
         result = conn.execute("SELECT id, name, last_name, username, password, email, phone_number, kids, salary, currency, country_id FROM user WHERE username = ?", (username,)).fetchone()
+        
+        if result == None:
+            return None
 
         if result[4] != password:
             return None
