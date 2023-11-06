@@ -1,7 +1,7 @@
 from model.country import Country
 
 class User:
-    def __init__(self, id, name, last_name, username, password, email, phone_number, kids, salary, currency, country: Country):
+    def __init__(self, id, name, last_name, username, password, email, phone_number, kids, salary: int, currency, country: Country):
         self.id = id
         self.name = name
         self.last_name = last_name

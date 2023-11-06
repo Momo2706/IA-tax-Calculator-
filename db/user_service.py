@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 from model.user import User
+from model.country import Country
 from db.country_service import get_country_by_id
 
 #returns user from database in accordance to their user id 
@@ -50,12 +51,27 @@ def get_user_by_username(username: str) -> User:
 
 
 #updates the table user in the databse if needed 
-def update_user(og_name, name, last_name, username, email, phone_number, kids, salary, currency, country) -> None:
+def update_user(user: User) -> None:
     try:
         conn = sqlite3.connect('my_app.db')
-        id = conn.execute("SELECT id FROM user WHERE name = ?", (og_name,)).fetchone()
-        country_id = conn.execute("SELECT id FROM country WHERE name = ?", (country,)).fetchone()
-        conn.execute("UPDATE user SET name = ?, last_name = ?, username = ?, email = ?, phone_number = ?, kids = ?, salary = ?, currency = ?, country_id = ? WHERE id = ?", (name, last_name, username, email, phone_number, kids, salary, currency, country_id[0], id[0]))
+        conn.execute("""
+            UPDATE user
+            SET name = ?, 
+                last_name = ?, 
+                username = ?, 
+                email = ?, 
+                phone_number = ?, 
+                kids = ?, 
+                salary = ?, 
+                currency = ?, 
+                country_id = ?
+            WHERE id = ?
+        """,
+        (user.name, user.last_name, user.username, user.email, user.phone_number, user.kids, user.salary, user.currency, user.country.id, user.id)
+        )
+        conn.commit()
+        conn.close()
+
     except Error as e:
         print(e)
 

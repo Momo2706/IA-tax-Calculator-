@@ -10,7 +10,7 @@ from globals import session
 def first_main_menu():
     sg.theme("DarkBlack1")
     user = session.get_user()
-    menu_window =[[sg.Text(f"Welcome{user.name}")],
+    menu_window =[[sg.Text(f"Welcome {user.name}")],
                   [sg.Button("New filing"), sg.Button("edit personal info")],
                   [sg.Cancel()]
     ]

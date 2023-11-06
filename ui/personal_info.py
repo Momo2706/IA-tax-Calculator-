@@ -3,7 +3,7 @@ import calendar
 from ui.router import go_to
 from typing import List
 from model.tax import Tax
-from db.country_service import get_countries, get_phone_codes, get_currency
+from db.country_service import get_countries, get_phone_codes, get_currency, get_country_by_name
 from db.history_service import set_history
 from db.user_service import update_user, log_in_user
 from ui.confirmation import confirm_personal_info_changes_successful, confirm_tax_filling
@@ -44,19 +44,19 @@ def go_to_personal_info():
         if event == sg.WINDOW_CLOSED or event == 'Cancel':
             break
         user = session.get_user()
-        new_name = values['-NAME-']
-        new_username = values['-USNAME-']
-        new_salary = values['-SALARY-']
-        new_country = values['-PLACE-']
-        new_last_name = values['-LASTNAME-']
-        new_email = values['-EMAIL-']
-        new_phone_number = values['-PHONE-']
-        new_kids = values['-KID-']
-        new_currency = values['-CASH-']
+        user.name = values['-NAME-']
+        user.username = values['-USNAME-']
+        user.salary = int(values['-SALARY-'])
+        country_name = values['-PLACE-']
+        country = get_country_by_name(country_name)
+        user.country = country
+        user.last_name = values['-LASTNAME-']
+        user.email = values['-EMAIL-']
+        user.phone_number = values['-PHONE-']
+        user.kids = values['-KID-']
+        user.currency = values['-CASH-']
         if event == 'Submit':
-                update_user(user.name, new_name, new_last_name, new_username, new_email, new_phone_number, new_kids, new_salary, new_currency, new_country)
-                update = log_in_user(new_username, user.password)
-                session.set_user(update)
+                update_user(user=user)
                 go_to(person_window, confirm_personal_info_changes_successful)
     person_window.close()
 

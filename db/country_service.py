@@ -35,9 +35,9 @@ def get_currency() -> List[str]:
 def get_country_by_id(country_id: int) -> Country:
     try:
         conn = sqlite3.connect('my_app.db')
-        result = conn.execute(" SELECT name, phone_code FROM country WHERE id = ?", (country_id,)).fetchone()
+        result = conn.execute(" SELECT id, name, phone_code FROM country WHERE id = ?", (country_id,)).fetchone()
 
-        country = Country(name=result[0], phone_code=result[1][0])
+        country = Country(id=result[0], name=result[1], phone_code=result[2][0])
 
         return country
     except Error as e:
@@ -47,9 +47,9 @@ def get_country_by_id(country_id: int) -> Country:
 def get_country_by_name(country: str) -> Country:
     try:
         conn = sqlite3.connect('my_app.db')
-        result = conn.execute(" SELECT name, phone_code FROM country WHERE name = ?", (country,)).fetchone()
+        result = conn.execute(" SELECT id, name, phone_code FROM country WHERE name = ?", (country,)).fetchone()
 
-        country = Country(name=result[0],phone_code=result[1])
+        country = Country(id=result[0], name=result[1], phone_code=result[2][0])
 
         return country
     except Error as e:

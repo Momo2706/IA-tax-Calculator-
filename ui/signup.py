@@ -67,7 +67,7 @@ def go_to_signup():
             is_user_used = check_if_username_is_used(username)
             if pass1 == pass2 and is_user_used == False:
                 save_user(name, last_name, username, hashlib.md5(pass1.encode()).digest(), email, phone_number, kids, salary, currency, country)
-                user = log_in_user(username, pass1)
+                user = log_in_user(username, hashlib.md5(pass1.encode()).digest())
                 session.set_user(user)
                 go_to(signwindow, first_main_menu)
             else:
