@@ -3,6 +3,7 @@ from sqlite3 import Error
 from model.bracket import Bracket 
 from typing import List
 
+#Retrieves the tax bracket according to their ID in the database
 def get_bracket_by_id(bracket_id: int) -> Bracket:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -14,6 +15,7 @@ def get_bracket_by_id(bracket_id: int) -> Bracket:
     except Error as e:
          print(e)
 
+#retrieves the tax brackets of a country by using the countries name 
 def get_brackets_by_country_name(name: str) -> List[Bracket]:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -35,26 +37,7 @@ def get_brackets_by_country_name(name: str) -> List[Bracket]:
     except Error as e:
          print(e)
 
-def get_percentage_by_lower_bracket(lower_bound):
-     try: 
-         conn = sqlite3.connect('my_app.db')
-         percent = conn.execute("SELECT percentage FROM bracket WHERE lower_bound = ?", (lower_bound,)).fetchone()
-
-         return percent
-     except Error as e:
-          print(e)
-
-def get_bracket_by_country_na(country_id: int) -> Bracket:
-    try:
-        conn = sqlite3.connect('my_app.db')
-        results = conn.execute("SELECT lower_bound, upper_bound, percentage FROM bracket WHERE country_id = ?", (country_id,)).fetchone()
-
-        bracket = Bracket(lower_bound=results[0], upper_bound=results[1], percentage=results[2])
-
-        return bracket 
-    except Error as e:
-         print(e)
-
+#Updates the tax brackests according to the bracket id 
 def set_bracket_by_id(bracket_id: int, bracket: Bracket) -> None:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -69,6 +52,7 @@ def set_bracket_by_id(bracket_id: int, bracket: Bracket) -> None:
         print(e)
     return
 
+#deletes brackest according to their bracket id
 def delete_bracket_by_id(bracket_id: int) -> Bracket:
         try:
             conn = sqlite3.connect('my_app.db')

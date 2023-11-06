@@ -10,7 +10,7 @@ from globals import session
 def first_main_menu():
     sg.theme("DarkBlack1")
     user = session.get_user()
-    menu_window =[[sg.Text("Welcome", key=user)],
+    menu_window =[[sg.Text(f"Welcome{user.name}")],
                   [sg.Button("New filing"), sg.Button("edit personal info")],
                   [sg.Cancel()]
     ]
@@ -47,7 +47,7 @@ def draw_figure(canvas, figure):
 def main_menu():
     sg.theme("DarkBlack1")
     user = session.get_user()
-    menu_window =[[sg.Text(f"Welcome, {user.username}")],
+    menu_window =[[sg.Text(f"Welcome back, {user.name}")],
                   [sg.Canvas(size=(1200,600), key='-CANVAS-')],
                   [sg.Button("New filing"), sg.Button("edit personal info")],
                   [sg.Cancel()]

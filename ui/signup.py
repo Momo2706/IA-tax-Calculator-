@@ -48,6 +48,7 @@ def go_to_signup():
 
             is_error = False
 
+            #checks that all posible variables have been answered or filled in to get the most accurate results
             for key, value in values.items():
                 if value == '':
                     is_error = True

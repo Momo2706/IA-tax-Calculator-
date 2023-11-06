@@ -30,11 +30,14 @@ def go_to_welcome():
                 break
 
             if event == LOGIN_BUTTON_EVENT:
+                #send user to the log in window 
                 go_to(window, go_to_login)
 
             if event == SIGNUP_BUTTON_EVENT:
+                #sends user ti the sign up window 
                 go_to(window, go_to_signup)
                 
             if event ==  OUR_STORY_BUTTON_EVENT:
+                #a brief story of the supposed company
                 sg.popup('A few years ago my brother graduated High school and moved to the Netherlabds to study. There he faced a few problems mainly the dutch housing crisis among others.' , 'A few years back he had finally found a house to stay in but the problem is that he had no idea on how taxes are filed so fo the most part my father was the one who did them for him.' , 'But my brother wasnt fund of the idea as he had moved away to have more liberty of his parents.' , 'So he had spoken to me to see if i had amy idea on how he could fix this whole ordeal, i thought for a while but all the ideas i could think of werent proper for a collage student.', 'Then i had gotten it an app that could atleast help hiom know how much he has to pay in taxes and so with some discussions with my computer science advisor he had helped me make the idea into a reality and so I came up with "EASY-TAX"', title="Our Story")
     window.close() 

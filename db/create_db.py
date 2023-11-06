@@ -1,6 +1,7 @@
 import sqlite3
 conn = sqlite3.connect('my_app.db')
 
+#if the database doesnt exist when the code is started this creates the database with the needed tables and pieces of data needed for the code to work
 def creat_db():
         query = (''' 
                  CREATE TABLE user

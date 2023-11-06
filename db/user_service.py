@@ -3,6 +3,7 @@ from sqlite3 import Error
 from model.user import User
 from db.country_service import get_country_by_id
 
+#returns user from database in accordance to their user id 
 def get_user(user_id: int) -> User:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -15,7 +16,7 @@ def get_user(user_id: int) -> User:
         print(e)
 
 
-# authenticate_user
+# authenticate_user and set object from class user 
 def log_in_user(username, password) -> User:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -35,11 +36,11 @@ def log_in_user(username, password) -> User:
     except Error as e:
         print(e)
 
-
+#returns name and username from database 
 def get_user_by_username(username: str) -> User:
     try:
         conn = sqlite3.connect('my_app.db')
-        result = conn.execute(" SELECT name, user FROM user WHERE username = ?", (username,)).fetchone()
+        result = conn.execute(" SELECT name, username FROM user WHERE username = ?", (username,)).fetchone()
 
         user = User(name=result[0], username=result[1])
 
@@ -48,7 +49,7 @@ def get_user_by_username(username: str) -> User:
         print(e)
 
 
-#finish this correctly
+#updates the table user in the databse if needed 
 def update_user(og_name, name, last_name, username, email, phone_number, kids, salary, currency, country) -> None:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -59,7 +60,7 @@ def update_user(og_name, name, last_name, username, email, phone_number, kids, s
         print(e)
 
 
-
+#deletas a row in the table user from the database if needed to 
 def remove_user_by_id(user_id: int) -> None:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -67,7 +68,7 @@ def remove_user_by_id(user_id: int) -> None:
     except Error as e:
         print(e)
 
-
+#saves the information of a person signing up to the database so it can later be used
 def save_user(name, last_name, user, password, email, phone_number, kids, salary, currency, country):
     try:
         conn = sqlite3.connect('my_app.db')
@@ -79,6 +80,7 @@ def save_user(name, last_name, user, password, email, phone_number, kids, salary
     except Error as e:
         print(e)
 
+#to not cause confutions within the database this checks that no two usernames are alike
 def check_if_username_is_used(username):
     try:
         conn = sqlite3.connect('my_app.db')

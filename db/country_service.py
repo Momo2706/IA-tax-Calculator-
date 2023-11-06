@@ -3,6 +3,7 @@ from sqlite3 import Error
 from model.country import Country
 from typing import List
 
+#Returns a list of all the countries by name in the database 
 def get_countries() -> List[str]:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -12,6 +13,7 @@ def get_countries() -> List[str]:
     except Error as e:
         print(e)
 
+#returns a list of all the distict phone codes in the database 
 def get_phone_codes() -> List[str]:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -20,6 +22,7 @@ def get_phone_codes() -> List[str]:
     except Error as e:
         print(e)
 
+#returns a list of all the distinct currencies of the countries in the database 
 def get_currency() -> List[str]:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -28,6 +31,7 @@ def get_currency() -> List[str]:
     except Error as e:
         print(e)
 
+#returns a specific country and phone code by using the country id found in the table user 
 def get_country_by_id(country_id: int) -> Country:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -39,7 +43,7 @@ def get_country_by_id(country_id: int) -> Country:
     except Error as e:
         print(e)
 
-
+#returns a specific country and phone code by using the name of the country
 def get_country_by_name(country: str) -> Country:
     try:
         conn = sqlite3.connect('my_app.db')
@@ -51,28 +55,31 @@ def get_country_by_name(country: str) -> Country:
     except Error as e:
         print(e)
 
+#allows for a new country to be inserted into the database if needed 
 def save_country(country: str, phone_code: str) -> None:
     try:
         conn = sqlite3.connect('my_app.db')
-        conn.execute("INSERT INTO country (name, tax_border, phone_code) \
+        conn.execute("INSERT INTO country (name, phone_code) \
                  VALUES (?, ?)", (country, phone_code))
         conn.commit()
         conn.close()
     except Error as e:
         print(e)
 
+#allows an update to be made in the case that a change in the country is made 
 def set_country_by_id(country_id: int, country: Country) -> None:
     try:
         conn = sqlite3.connect('my_app.db')
-        conn.execute("UPDATE country SET name = ? tax_border = ? WHERE id = ?", (
+        conn.execute("UPDATE country SET name = ? phone_code WHERE id = ?", (
             country.name,
-            country.tax_border,
+            country.phone_code,
             country_id
             ))
     except Error as e:
         print(e)
     return
 
+#alows for a country row to be deleted from a database 
 def remove_country_by_id(country_id: int) -> Country:
     try:
         conn = sqlite3.connect('my_app.db')
