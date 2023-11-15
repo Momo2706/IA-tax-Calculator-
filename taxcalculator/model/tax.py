@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from model.user import User
+from taxcalculator.model.user import User
 
 class Tax(ABC):
  

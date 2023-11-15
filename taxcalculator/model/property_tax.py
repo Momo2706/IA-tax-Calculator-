@@ -1,6 +1,6 @@
 
-from model.tax import Tax
-from model.user import User
+from taxcalculator.model.tax import Tax
+from taxcalculator.model.user import User
 
 class PropertyTax(Tax):
     # overriding abstract method

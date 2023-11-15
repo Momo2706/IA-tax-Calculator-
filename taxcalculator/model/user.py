@@ -1,4 +1,4 @@
-from model.country import Country
+from taxcalculator.model.country import Country
 
 class User:
     def __init__(self, id, name, last_name, username, password, email, phone_number, kids, salary: int, currency, country: Country):

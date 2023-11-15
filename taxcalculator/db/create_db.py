@@ -43,7 +43,7 @@ def creat_db():
                  lower_bound INTEGER NOT NULL,
                  upper_bound INTEGER NOT NULL,
                  percentage INTEGER NOT NULL,
-                 FOREIGN KEY(country_id) REFERENCES id)
+                 FOREIGN KEY(country_id) REFERENCES country(id)
                  )
                 '''
                 )

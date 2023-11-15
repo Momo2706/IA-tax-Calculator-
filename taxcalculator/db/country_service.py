@@ -1,6 +1,6 @@
 import sqlite3
 from sqlite3 import Error
-from model.country import Country
+from taxcalculator.model.country import Country
 from typing import List
 
 #Returns a list of all the countries by name in the database 

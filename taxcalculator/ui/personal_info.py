@@ -1,16 +1,16 @@
 import PySimpleGUI as sg 
 import calendar 
-from ui.router import go_to
+from taxcalculator.ui.router import go_to
 from typing import List
-from model.tax import Tax
-from db.country_service import get_countries, get_phone_codes, get_currency, get_country_by_name
-from db.history_service import set_history
-from db.user_service import update_user, log_in_user
-from ui.confirmation import confirm_personal_info_changes_successful, confirm_tax_filling
+from taxcalculator.model.tax import Tax
+from taxcalculator.db.country_service import get_countries, get_phone_codes, get_currency, get_country_by_name
+from taxcalculator.db.history_service import set_history
+from taxcalculator.db.user_service import update_user, log_in_user
+from taxcalculator.ui.confirmation import confirm_personal_info_changes_successful, confirm_tax_filling
 from datetime import datetime
-from model.income_tax import IncomeTax
-from model.property_tax import PropertyTax
-from globals import session
+from taxcalculator.model.income_tax import IncomeTax
+from taxcalculator.model.property_tax import PropertyTax
+from taxcalculator.globals import session
 
 sg.theme("DarkBlack1")
 

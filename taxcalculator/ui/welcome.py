@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
-from ui.logo import IMAGE
-from ui.router import go_to
-from ui.login import go_to_login
-from ui.signup import go_to_signup
+from taxcalculator.ui.logo import IMAGE
+from taxcalculator.ui.router import go_to
+from taxcalculator.ui.login import go_to_login
+from taxcalculator.ui.signup import go_to_signup
 
 LOGIN_BUTTON_EVENT = 'Login'
 SIGNUP_BUTTON_EVENT = 'Signup'

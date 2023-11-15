@@ -1,10 +1,10 @@
 import PySimpleGUI as sg
 import hashlib
-from db.user_service import save_user, log_in_user, check_if_username_is_used
-from ui.router import go_to
-from db.country_service import get_countries, get_phone_codes, get_currency
-from ui.menu import first_main_menu
-from globals import session
+from taxcalculator.db.user_service import save_user, log_in_user, check_if_username_is_used
+from taxcalculator.ui.router import go_to
+from taxcalculator.db.country_service import get_countries, get_phone_codes, get_currency
+from taxcalculator.ui.menu import first_main_menu
+from taxcalculator.globals import session
 
 def go_to_signup():
     sg.theme("DarkBlack1")

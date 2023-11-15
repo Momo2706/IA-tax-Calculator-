@@ -1,9 +1,9 @@
 import PySimpleGUI as sg 
-from ui.router import go_to
+from taxcalculator.ui.router import go_to
 
 
 def confirm_personal_info_changes_successful():
-    from ui.menu import main_menu
+    from taxcalculator.ui.menu import main_menu
     sg.theme("DarkBlack1")
     menu_window =[[sg.Text("The changes to you personal info were succesful")],
                   [sg.Button("Main Menu"), sg.Button('Leave')],
@@ -20,7 +20,7 @@ def confirm_personal_info_changes_successful():
 
 #put how much they have to pay in taxes
 def confirm_tax_filling():
-    from ui.menu import main_menu
+    from taxcalculator.ui.menu import main_menu
     sg.theme("DarkBlack1")
     menu_window =[[sg.Text("Taxes calculated")],
                   [sg.Button("Main Menu"), sg.Button('Leave')],

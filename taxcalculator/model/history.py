@@ -1,4 +1,4 @@
-from model.user import User
+from taxcalculator.model.user import User
 
 class History:
     def __init__(self, user: User, date: int, tax_amount: int):

@@ -1,11 +1,11 @@
 import PySimpleGUI as sg 
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from ui.personal_info import go_to_personal_info, go_to_tax_info
-from db.history_service import get_history_by_user
-from ui.router import go_to
+from taxcalculator.ui.personal_info import go_to_personal_info, go_to_tax_info
+from taxcalculator.db.history_service import get_history_by_user
+from taxcalculator.ui.router import go_to
 from datetime import datetime
-from globals import session
+from taxcalculator.globals import session
     
 def first_main_menu():
     sg.theme("DarkBlack1")

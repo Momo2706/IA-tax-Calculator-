@@ -1,3 +1,7 @@
 __pycache__/
 */__pycache__/
 my_app.db
+venv/
+build/
+dist/
+*.egg-info

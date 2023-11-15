@@ -1,8 +1,8 @@
 import sqlite3
 from sqlite3 import Error
-from model.user import User
-from model.country import Country
-from db.country_service import get_country_by_id
+from taxcalculator.model.user import User
+from taxcalculator.model.country import Country
+from taxcalculator.db.country_service import get_country_by_id
 
 #returns user from database in accordance to their user id 
 def get_user(user_id: int) -> User:

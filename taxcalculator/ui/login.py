@@ -1,11 +1,11 @@
 import PySimpleGUI as sg
 import hashlib
-from db.user_service import log_in_user
-from ui.menu import main_menu
-from ui.router import go_to
-from globals import session
-from model.user import User
-#from ui.welcome import go_to_welcome
+from taxcalculator.db.user_service import log_in_user
+from taxcalculator.ui.menu import main_menu
+from taxcalculator.ui.router import go_to
+from taxcalculator.globals import session
+from taxcalculator.model.user import User
+#from taxcalculator.ui.welcome import go_to_welcome
 
 def go_to_login():
     sg.theme("DarkBlack1")

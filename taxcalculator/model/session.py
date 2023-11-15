@@ -1,5 +1,5 @@
-from model.user import User
-from model.country import Country
+from taxcalculator.model.user import User
+from taxcalculator.model.country import Country
 
 class Session:
     def __init__(self):

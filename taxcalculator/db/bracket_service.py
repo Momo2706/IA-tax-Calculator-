@@ -1,6 +1,6 @@
 import sqlite3
 from sqlite3 import Error
-from model.bracket import Bracket 
+from taxcalculator.model.bracket import Bracket 
 from typing import List
 
 #Retrieves the tax bracket according to their ID in the database

@@ -1,6 +1,6 @@
 from typing import List
-from model.tax import Tax
-from model.user import User
+from taxcalculator.model.tax import Tax
+from taxcalculator.model.user import User
 
 # for learning purposes
 def calculate_tax(user: User):

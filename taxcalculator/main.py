@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
-from ui.welcome import go_to_welcome
-from db.database_interface import is_db_connected
-from db.create_db import creat_db
+from taxcalculator.ui.welcome import go_to_welcome
+from taxcalculator.db.database_interface import is_db_connected
+from taxcalculator.db.create_db import creat_db
 
 def main():
     go_to_welcome()

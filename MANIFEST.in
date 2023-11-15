@@ -1,0 +1,3 @@
+recursive-include taxcalculator/db *
+recursive-include taxcalculator/model *
+recursive-include taxcalculator/ui *

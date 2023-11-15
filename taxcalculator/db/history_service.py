@@ -1,7 +1,7 @@
 import sqlite3
-from model.user import User
+from taxcalculator.model.user import User
 from sqlite3 import Error 
-from model.history import History
+from taxcalculator.model.history import History
 from typing import List
 
 #after the tax has been calculated the user date and tax paid are saved into the database 
