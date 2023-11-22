@@ -65,7 +65,7 @@ def go_to_tax_info():
      layout = [
           [sg.Text("Do you live in a house or apartment.")],
           [sg.Radio("House", "Housing", key='-HOUSE-'), sg.Radio("Appartment", "Housing", key='-APPA-')],
-          [sg.Text("Set the date of when the tax is beeing filled"),sg.Input(key='-PICKUP-', size=(20, 1)), sg.CalendarButton("Filing Date", close_when_date_chosen=True, target='-PICKUP-', location=(0, 0), no_titlebar=False, format=('%Y-%m-%d'))],
+          [sg.Text("Set the date of when the tax is beeing filled"),sg.Input(key='-PICKUP-', size=(20, 1)), sg.CalendarButton("Filing Date", close_when_date_chosen=True, target='-PICKUP-', location=(0, 0), no_titlebar=False, format=('%Y'))],#for a full date = '%Y-%m-%d'
           [sg.Submit(), sg.Button("Back"), sg.Cancel()]
         ]
      
