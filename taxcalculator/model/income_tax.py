@@ -14,4 +14,4 @@ class IncomeTax(Tax):
             else:
                 total_tax_amount += (user.salary-brackets.lower_bound)*(brackets.percentage/100)
                 break
-        return total_tax_amount
+        return round(total_tax_amount, 2)

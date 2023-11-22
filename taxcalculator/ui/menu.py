@@ -26,10 +26,12 @@ def first_main_menu():
             go_to(window, go_to_personal_info)
     window.close()
 
-def history_graph(filling_dates, tax_amount):
+def history_graph(filing_dates, tax_amount):
      # Set the figure size (width, height) in inches
     plt.figure(figsize=(5, 3))
-    plt.plot(filling_dates, tax_amount, color='blue', marker='o')
+    plt.plot(filing_dates, tax_amount, color='blue', marker='o')
+    for a,b in zip(filing_dates, tax_amount): 
+        plt.text(a, b, str(f'{b:.2f}'), fontsize=6)
     plt.title('Taxing history', fontsize=8)
     plt.xlabel('dates', fontsize=4)
     plt.ylabel('Tax paid', fontsize=4)
@@ -62,7 +64,6 @@ def main_menu():
         amount.append(history.tax_amount)
 
     figure = history_graph(dates, amount)
-
     draw_figure(window['-CANVAS-'].TKCanvas, figure)
 
     while True:

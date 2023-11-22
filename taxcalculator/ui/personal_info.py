@@ -78,7 +78,7 @@ def go_to_tax_info():
                break 
           if event == 'Submit':
                date_str = values['-PICKUP-']
-               date = datetime.strptime(date_str, '%Y-%m-%d')
+               date = datetime.strptime(date_str, '%Y')
                user = session.get_user()
 
                appliable_taxes = get_appliable_taxes()
