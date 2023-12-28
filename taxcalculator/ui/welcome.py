@@ -13,9 +13,7 @@ sg.theme("DarkBlack1")
 
 WELCOME_WINDOW = [[sg.Image(source = IMAGE, key=('-IMAGE-'), expand_x=True, expand_y=True, size=(300,300))],
           [sg.Text("Hello and welcome to EASY-TAX, an app dedicated to helping people file their income tax.")],
-          [sg.Text("Our app will help you file taxes for any of the following countries: USA, Netherlands, Spain, United Kingdom, and/or Monaco.")],
-          [sg.Text("We also know that some of the mentioned countries have different taxes for the different regions or states and so we have also made it that posible for these to be considered but only to the main 5 states.")],
-          [sg.Text("with this app you will be able to calculate your income tax with including the exemptions that come with your family like the amount of kids, and marital status.")],
+          [sg.Text("Our app will help you file taxes for any of the countries that appear in the lists.")],
           [sg.Text("We hope you join us in helping you have a better financial status.")],
           [sg.Button(LOGIN_BUTTON_EVENT), sg.Button(SIGNUP_BUTTON_EVENT), sg.Cancel(), sg.Button(OUR_STORY_BUTTON_EVENT)]
 ]

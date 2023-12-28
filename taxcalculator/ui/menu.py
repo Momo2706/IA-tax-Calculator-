@@ -28,7 +28,7 @@ def first_main_menu():
 
 def history_graph(filing_dates, tax_amount):
      # Set the figure size (width, height) in inches
-    plt.figure(figsize=(5, 3))
+    plt.figure(figsize=(10, 6))
     plt.plot(filing_dates, tax_amount, color='blue', marker='o')
     for a,b in zip(filing_dates, tax_amount): 
         plt.text(a, b, str(f'{b:.2f}'), fontsize=6)
